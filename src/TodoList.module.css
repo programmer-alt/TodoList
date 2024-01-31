@@ -1,6 +1,7 @@
 
 .myList {
-    list-style-type: none;
-    
-    
+    list-style-type: none;    
+}
+.completed {
+    text-decoration: line-through;
 }

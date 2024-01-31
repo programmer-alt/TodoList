@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styles from './TodoList.module.css';
 
 type Todo = {
     title: string,
@@ -24,7 +25,7 @@ const TodoItem: React.FC<Props> = ({ task, onDeleteTask, onToggleComplete }) => 
     return (
         <li>
             <input type="checkbox" checked={task.isComplete} onChange={handleToggleComplete} />
-            {task.title}
+           <span className={task.isComplete? `${styles.completed}`: 'not-completed' }> {task.title} </span>
             <button onClick={handleDeleteTask}>x</button>
         </li>
     )
