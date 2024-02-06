@@ -25,7 +25,7 @@ const TodoItem: React.FC<Props> = ({ task, onDeleteTask, onToggleComplete }) => 
     return (
         <li>
             <input type="checkbox" checked={task.isComplete} onChange={handleToggleComplete} />
-           <span className={task.isComplete? `${styles.completed}`: 'not-completed' }> {task.title} </span>
+           <span style={{textDecoration: task.isComplete ? 'line-through': 'none'}}> {task.title} </span>
             <button onClick={handleDeleteTask}>x</button>
         </li>
     )

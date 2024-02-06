@@ -23,6 +23,7 @@ const TodoList: React.FC = () => {
         todo.id === id ? {...todo, isComplete: !todo.isComplete}: todo
         )
         setTask(updatedTask)
+        console.log(updatedTask)
     }
     return (
         <div>
