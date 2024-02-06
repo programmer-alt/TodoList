@@ -1,7 +1,6 @@
 import { render, fireEvent, screen, waitFor, getByRole } from '@testing-library/react';
 import userEvent from '@testing-library/user-event'; // Подключение userEvent для управления событиями пользователя
 import TodoItem from './TodoItem';
-import styles from './TodoList.module.css';
 //npm test -- --testPathPattern=TodoItem.test.tsx
 
 describe('TodoItem', () => {
@@ -40,8 +39,7 @@ describe('TodoItem', () => {
       id: 'test-id',
       isComplete: false
     }
-    //используем функцию рендер из библиотеки RTL
-    // Мы также деструктурируем объект, возвращаемый функцией render, 
+    
     //чтобы получить метод getByText, который позволяет найти элементы по тексту.
     const { getByText } = render(<TodoItem task={mockTask}
       onDeleteTask={mockDeleteTask} onToggleComplete={() => { }} />)
