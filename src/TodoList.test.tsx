@@ -20,6 +20,7 @@ describe('TodoList', () => {
 
         // Ищем поле ввода по его placeholder и вводим название новой задачи
         const input = getByPlaceholderText('введите заметку');
+        // Имитируем изменение значения поля ввода, устанавливая его значение в 'New Task'
         fireEvent.change(input, { target: { value: 'New Task' } });
 
         // Ищем кнопку добавления задачи по ее тексту и кликаем по ней
