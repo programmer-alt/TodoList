@@ -1,6 +1,6 @@
 // Импортируем необходимые зависимости для тестирования
 import React from 'react';
-import {render, fireEvent, queryByText, getByPlaceholderText, getByText,findAllByText,getAllByText  } from '@testing-library/react';
+import { render, fireEvent, queryByText, getByPlaceholderText, getByText, findAllByText, getAllByText } from '@testing-library/react';
 import TodoList from './TodoList';
 import generateUniqueId from 'generate-unique-id';
 import TodoInput from './TodoInput';
@@ -58,43 +58,59 @@ describe('TodoList', () => {
         expect(queryByText('New Task')).toBeNull();
     });
 
-    
+
     // Тест на проверку переключения статуса выполнения задачи
-it('should toggle the completion status of a task when handleToggleComplete is called', () => {
-    const { getByText, getByRole, getByPlaceholderText, rerender} = render(<TodoList />)
+    it('should toggle the completion status of a task when handleToggleComplete is called', () => {
+        const { getByText, getByRole, getByPlaceholderText, rerender } = render(<TodoList />)
 
-    // Находим поле ввода по его placeholder и вводим название новой задачи
-    const input = getByPlaceholderText('введите заметку')
-    fireEvent.change(input, { target: {value: 'New Task'}});
-    // Добавляем новую задачу
-    const addButton = getByText('Добавить заметку')
-    fireEvent.click(addButton)
-    
-    // Проверяем, что новая задача была добавлена в состояние компонента
-    expect(getByText('New Task')).toBeInTheDocument();
-    
-    // Находим чекбокс задачи
-    const checkbox = getByRole('checkbox');
-    fireEvent.click(checkbox); // Кликаем по чекбоксу
-    // Перерендерим компонент, чтобы увидеть обновленный статус задачи
-    rerender(<TodoList />);
-    expect(checkbox).toBeChecked(); // Проверяем, что чекбокс теперь отмечен
-    expect(getByText('New Task')).toHaveStyle('textDecoration: line-through'); 
-    // Проверяем, что текст задачи теперь перечеркнут
-});
-// Запускает тестовый случай, проверяющий, 
-//что задача с пустым текстом не будет добавлена в список задач.
-it('should not add a task with empty text', () => {
-    const mockAddTask = jest.fn(); // Создаем mock функцию для onAddTask
-    const { getByPlaceholderText, getByText } = render(<TodoInput onAddTask={mockAddTask} />);
-    // Находим поле ввода по его placeholder и вводим пустой текст
-    const input = getByPlaceholderText('введите заметку');
-    fireEvent.change(input, { target: { value: '' } });
-    // Находим кнопку добавления задачи по ее тексту и кликаем по ней
-    const addButton = getByText('Добавить заметку');
-    fireEvent.click(addButton);
-    // Проверяем, что функция onAddTask не была вызвана
-    expect(mockAddTask).not.toHaveBeenCalled();
-});
+        // Находим поле ввода по его placeholder и вводим название новой задачи
+        const input = getByPlaceholderText('введите заметку')
+        fireEvent.change(input, { target: { value: 'New Task' } });
+        // Добавляем новую задачу
+        const addButton = getByText('Добавить заметку')
+        fireEvent.click(addButton)
 
+        // Проверяем, что новая задача была добавлена в состояние компонента
+        expect(getByText('New Task')).toBeInTheDocument();
+
+        // Находим чекбокс задачи
+        const checkbox = getByRole('checkbox');
+        fireEvent.click(checkbox); // Кликаем по чекбоксу
+        // Перерендерим компонент, чтобы увидеть обновленный статус задачи
+        rerender(<TodoList />);
+        expect(checkbox).toBeChecked(); // Проверяем, что чекбокс теперь отмечен
+        expect(getByText('New Task')).toHaveStyle('textDecoration: line-through');
+        // Проверяем, что текст задачи теперь перечеркнут
+    });
+    // Запускает тестовый случай, проверяющий, 
+    //что задача с пустым текстом не будет добавлена в список задач.
+    it('should not add a task with empty text', () => {
+        const mockAddTask = jest.fn(); // Создаем mock функцию для onAddTask
+        const { getByPlaceholderText, getByText } = render(<TodoInput onAddTask={mockAddTask} />);
+        // Находим поле ввода по его placeholder и вводим пустой текст
+        const input = getByPlaceholderText('введите заметку');
+        fireEvent.change(input, { target: { value: '' } });
+        // Находим кнопку добавления задачи по ее тексту и кликаем по ней
+        const addButton = getByText('Добавить заметку');
+        fireEvent.click(addButton);
+        // Проверяем, что функция onAddTask не была вызвана
+        expect(mockAddTask).not.toHaveBeenCalled();
+    });
+    // добавляет задание с длинным текстом без ошибки
+    it('should add a task with very long text without errors', () => {
+        const mockAddTask = jest.fn(); // Создаем mock функцию для onAddTask
+        const { getByPlaceholderText, getByText } = render(<TodoInput onAddTask={mockAddTask} />);
+        const input = getByPlaceholderText('введите заметку');
+        
+        // Генерируем очень длинный текст (например, 1000 символов)
+        const longText = 'a'.repeat(1000);
+        
+        fireEvent.change(input, { target: { value: longText } }); // Вводим очень длинный текст
+        const addButton = getByText('Добавить заметку');
+        fireEvent.click(addButton); // Нажимаем кнопку "Добавить заметку"
+    
+        // Проверяем, что функция onAddTask была вызвана с очень длинным текстом
+        expect(mockAddTask).toHaveBeenCalledWith(longText);
+    });
+    
 });
