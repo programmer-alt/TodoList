@@ -112,5 +112,18 @@ describe('TodoList', () => {
         // Проверяем, что функция onAddTask была вызвана с очень длинным текстом
         expect(mockAddTask).toHaveBeenCalledWith(longText);
     });
+    it('should add a task with text containing HTML tags without errors', () => { 
+         const mockAddTask = jest.fn(); // Создаем mock функцию для onAddTask
+    const { getByPlaceholderText, getByText } = render(<TodoInput onAddTask={mockAddTask} />);
+    const input = getByPlaceholderText('введите заметку');
     
+    const textWithHTML = '<div>This is a task with <strong>HTML tags</strong></div>'; // Текст задачи с HTML-тегами
+    
+    fireEvent.change(input, { target: { value: textWithHTML } }); // Вводим текст с HTML-тегами
+    const addButton = getByText('Добавить заметку');
+    fireEvent.click(addButton); // Нажимаем кнопку "Добавить заметку"
+
+    // Проверяем, что функция onAddTask была вызвана с текстом, содержащим HTML-теги
+    expect(mockAddTask).toHaveBeenCalledWith(textWithHTML);
+});
 });
