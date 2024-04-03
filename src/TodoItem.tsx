@@ -6,13 +6,11 @@ type Todo = {
     id: string,
     isComplete: boolean
 }
-
 type Props = {
     task: Todo,
     onDeleteTask: (id: string) => void,
     onToggleComplete: (id: string) => void
 }
-
 const TodoItem: React.FC<Props> = ({ task, onDeleteTask, onToggleComplete }) => {
     const handleDeleteTask = () => {
         onDeleteTask(task.id)

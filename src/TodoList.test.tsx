@@ -112,18 +112,30 @@ describe('TodoList', () => {
         // Проверяем, что функция onAddTask была вызвана с очень длинным текстом
         expect(mockAddTask).toHaveBeenCalledWith(longText);
     });
+    //добавление задания с html тегами без ошибок
     it('should add a task with text containing HTML tags without errors', () => { 
-         const mockAddTask = jest.fn(); // Создаем mock функцию для onAddTask
-    const { getByPlaceholderText, getByText } = render(<TodoInput onAddTask={mockAddTask} />);
-    const input = getByPlaceholderText('введите заметку');
-    
-    const textWithHTML = '<div>This is a task with <strong>HTML tags</strong></div>'; // Текст задачи с HTML-тегами
-    
-    fireEvent.change(input, { target: { value: textWithHTML } }); // Вводим текст с HTML-тегами
-    const addButton = getByText('Добавить заметку');
-    fireEvent.click(addButton); // Нажимаем кнопку "Добавить заметку"
+        // Создаем mock функцию для onAddTask, чтобы проверить, вызывается ли она с ожидаемыми аргументами
+const mockAddTask = jest.fn();
 
-    // Проверяем, что функция onAddTask была вызвана с текстом, содержащим HTML-теги
-    expect(mockAddTask).toHaveBeenCalledWith(textWithHTML);
+// Рендерим компонент TodoInput с передачей mock функции в качестве обработчика добавления задачи
+const { getByPlaceholderText, getByText } = render(<TodoInput onAddTask={mockAddTask} />);
+
+// Получаем ссылку на элемент ввода по его placeholder тексту
+const input = getByPlaceholderText('введите заметку');
+
+// Определяем текст задачи, содержащий HTML-теги
+const textWithHTML = '<div>This is a task with <strong>HTML tags</strong></div>';
+
+// Имитируем изменение значения ввода на текст с HTML-тегами
+fireEvent.change(input, { target: { value: textWithHTML } });
+
+// Получаем ссылку на кнопку добавления задачи по ее тексту
+const addButton = getByText('Добавить заметку');
+
+// Имитируем клик по кнопке добавления задачи
+fireEvent.click(addButton);
+
+// Проверяем, что mock функция onAddTask была вызвана с текстом, содержащим HTML-теги
+expect(mockAddTask).toHaveBeenCalledWith(textWithHTML);
 });
 });

@@ -1,26 +1,15 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx"
-  },
-  "include": [
-    "src"
-  ]
+    "target": "ES2020", // Целевая версия ECMAScript для компиляции. В данном случае, используется ES2020.
+    "module": "commonjs", // Система модулей, используемая в выходном коде. CommonJS используется в Node.js.
+    "lib": ["ES2020", "dom"], // Библиотеки, доступные в глобальной области видимости. Включает в себя типы для ES2020 и DOM API.
+    "jsx":"react-jsxdev", // Настройка для обработки JSX. "react-jsxdev" используется для разработки с React 17 и выше.
+    "outDir": "./dist", // Директория, куда будут помещены скомпилированные файлы.
+    "rootDir": "./src", // Корневая директория исходного кода. TypeScript будет искать файлы для компиляции здесь.
+    "declaration": true, // Генерировать файлы объявления (.d.ts) для каждого файла TypeScript.
+    "noImplicitAny": true, // Запретить использование типа `any` без явного указания.
+    "strictNullChecks": true, // Включить строгую проверку на `null` и `undefined`.
+    "esModuleInterop": true, // Включить совместимость с модулями ES6.
+    "allowSyntheticDefaultImports": true // Разрешить синтетические импорты по умолчанию для модулей, которые не имеют экспорта по умолчанию.
+  }
 }

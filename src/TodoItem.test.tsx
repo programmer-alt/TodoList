@@ -1,6 +1,7 @@
 import { render, fireEvent, screen, waitFor, getByRole } from '@testing-library/react';
 import userEvent from '@testing-library/user-event'; // Подключение userEvent для управления событиями пользователя
 import TodoItem from './TodoItem';
+import React from 'react';
 //npm test -- --testPathPattern=TodoItem.test.tsx
 
 describe('TodoItem', () => {
