@@ -7,6 +7,7 @@ import TodoItem from './TodoItem';
 // Импортируем компонент TodoInput для ввода новой задачи
 import TodoInput from './TodoInput';
 // Импортируем стили для компонента TodoList
+/// <reference types="react-scripts" />
 import styles from './TodoList.module.css';
 
 

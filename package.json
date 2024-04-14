@@ -2,7 +2,7 @@
   "name": "todo",
   "version": "0.1.0",
   "private": true,
-  "type": "module", 
+  "type": "module",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/user-event": "^13.5.0",
@@ -45,6 +45,7 @@
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@testing-library/react": "^14.1.2",
     "jest": "^27.5.1",
+    "ts-node": "^10.9.2",
     "typescript": "^5.4.3"
   }
 }
